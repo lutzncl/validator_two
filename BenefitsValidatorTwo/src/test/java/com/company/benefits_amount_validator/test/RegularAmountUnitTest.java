@@ -93,7 +93,7 @@ public class RegularAmountUnitTest {
 		regularAmount.setFrequency(Frequency.WEEK);
 		regularAmount.setAmount(null);
 		Set<ConstraintViolation<RegularAmount>> violations = validator.validate(regularAmount);
-		System.out.println("Check amount is not null violations:");
+		logger.info("Check amount is not null violations:");
 		printViolations(violations);
 		assertEquals(2, violations.size());
 	}
@@ -106,7 +106,7 @@ public class RegularAmountUnitTest {
 		regularAmount.setFrequency(Frequency.WEEK);
 		regularAmount.setAmount("0.00");
 		Set<ConstraintViolation<RegularAmount>> violations = validator.validate(regularAmount);
-		System.out.println("Check amount is zero violations:");
+		logger.info("Check amount is zero violations:");
 		//printViolations(violations);
 		//assertEquals(, violations.size());
 		assertTrue(violations.isEmpty());
@@ -168,7 +168,7 @@ public class RegularAmountUnitTest {
 		regularAmount.setFrequency(Frequency.TWO_WEEK);
 		regularAmount.setAmount("115.81");
 		Set<ConstraintViolation<RegularAmount>> violations = validator.validate(regularAmount);
-		System.out.println("Check TWO_WEEK amount that is not divisible by two is flagged violations:");
+		logger.info("Check TWO_WEEK amount that is not divisible by two is flagged violations:");
 		printViolations(violations);
 		assertEquals(1, violations.size());
 	}
@@ -192,7 +192,7 @@ public class RegularAmountUnitTest {
 		regularAmount.setFrequency(Frequency.FOUR_WEEK);
 		regularAmount.setAmount("289.50");
 		Set<ConstraintViolation<RegularAmount>> violations = validator.validate(regularAmount);
-		System.out.println("Check FOUR_WEEK amount that is NOT divisible to a whole week value is NOT accepted violations:");
+		logger.info("Check FOUR_WEEK amount that is NOT divisible to a whole week value is NOT accepted violations:");
 		printViolations(violations);
 		assertEquals(1, violations.size());
 	}
@@ -227,7 +227,7 @@ public class RegularAmountUnitTest {
 		regularAmount.setFrequency(Frequency.QUARTER);
 		regularAmount.setAmount("810.60");
 		Set<ConstraintViolation<RegularAmount>> violations = validator.validate(regularAmount);
-		System.out.println("Check QUARTER amount that is NOT divisible to a whole week value is NOT accepted violations:");
+		logger.info("Check QUARTER amount that is NOT divisible to a whole week value is NOT accepted violations:");
 		printViolations(violations);
 		assertEquals(1, violations.size());
 	}
@@ -251,7 +251,7 @@ public class RegularAmountUnitTest {
 		regularAmount.setFrequency(Frequency.QUARTER);
 		regularAmount.setAmount("3068.7");
 		Set<ConstraintViolation<RegularAmount>> violations = validator.validate(regularAmount);
-		System.out.println("Check QUARTER amount that is NOT divisible to a whole week value is NOT accepted violations:");
+		logger.info("Check QUARTER amount that is NOT divisible to a whole week value is NOT accepted violations:");
 		printViolations(violations);
 		assertEquals(1, violations.size());
 	}

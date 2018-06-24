@@ -9,7 +9,7 @@ import com.company.benefits_amount_validator.model.RegularAmount;
 
 public class App {
 	//private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
-	private static Logger logger = LoggerFactory.getLogger("Logging Tester");
+	private static final Logger logger = LoggerFactory.getLogger(App.class);
 	public static void main(String[] args) {
 		RegularAmount ra = new RegularAmount(Frequency.WEEK, "57.90");
 		logger.info("Hello from the logger");
