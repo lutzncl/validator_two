@@ -45,7 +45,7 @@ public class RegularAmountValidator implements ConstraintValidator<ValidateRegul
 		// Convert amount to pence
 		double penceAmount = amount * 100;
 		
-		bg1 = new BigDecimal(amount);
+		bg1 = new BigDecimal(ra.getAmount());
 		bg2 = bg1.multiply(new BigDecimal("100"));
 		System.out.println(bg2);
 		
@@ -55,7 +55,7 @@ public class RegularAmountValidator implements ConstraintValidator<ValidateRegul
 		switch (ra.getFrequency()) {
 		case WEEK: return true;
 		case TWO_WEEK:
-			System.out.println(penceAmount);
+			//System.out.println(penceAmount);
 			if (bg2.remainder(new BigDecimal("2")).compareTo(BigDecimal.ZERO) > 0)
 				return false;
 			else
