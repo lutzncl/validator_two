@@ -12,6 +12,8 @@ import javax.validation.ValidatorFactory;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.company.benefits_amount_validator.model.Frequency;
 import com.company.benefits_amount_validator.model.RegularAmount;
@@ -20,6 +22,7 @@ public class RegularAmountUnitTest {
 
 	private Validator validator;
 	private RegularAmount regularAmount;
+	private static Logger logger = LoggerFactory.getLogger("Logging Tester");
 
 	@Before
 	public void init() {
@@ -64,7 +67,7 @@ public class RegularAmountUnitTest {
 		regularAmount.setFrequency(Frequency.WEEK);
 		regularAmount.setAmount("testAmount");
 		Set<ConstraintViolation<RegularAmount>> violations = validator.validate(regularAmount);
-		System.out.println("Check amount is not a number violations:");
+		logger.info("Check amount is not a number violations:");
 		printViolations(violations);
 		assertEquals(1, violations.size());
 	}
@@ -77,7 +80,7 @@ public class RegularAmountUnitTest {
 		regularAmount.setFrequency(null);
 		regularAmount.setAmount("60.00");
 		Set<ConstraintViolation<RegularAmount>> violations = validator.validate(regularAmount);
-		System.out.println("Check frequency is not null violations:");
+		logger.info("Check frequency is not null violations:");
 		printViolations(violations);
 		assertEquals(2, violations.size());
 	}
@@ -96,14 +99,29 @@ public class RegularAmountUnitTest {
 	}
 	
 	/**
-	 * Check frequency is not null
+	 * Check amount is zero
 	 */
 	@Test
-	public void amountNull() {
+	public void amountZero() {
 		regularAmount.setFrequency(Frequency.WEEK);
 		regularAmount.setAmount("0.00");
 		Set<ConstraintViolation<RegularAmount>> violations = validator.validate(regularAmount);
-		System.out.println("Check amount is not null violations:");
+		System.out.println("Check amount is zero violations:");
+		//printViolations(violations);
+		//assertEquals(, violations.size());
+		assertTrue(violations.isEmpty());
+	}
+	
+	/**
+	 * Check amount is less than two
+	 */
+	@Test
+	public void amountLessThanTwo() {
+		regularAmount.setFrequency(Frequency.TWO_WEEK);
+		regularAmount.setAmount("1.10");
+		Set<ConstraintViolation<RegularAmount>> violations = validator.validate(regularAmount);
+		System.out.println("Check amount is less than two violations:");
+		
 		//printViolations(violations);
 		//assertEquals(, violations.size());
 		assertTrue(violations.isEmpty());
@@ -248,7 +266,8 @@ public class RegularAmountUnitTest {
 	    for (ConstraintViolation<RegularAmount> violation : constraintViolations) {
     
 	      String message = violation.getMessage();
-	      System.out.println("Found constraint violation. Message: " + message);
+	      //System.out.println("Found constraint violation. Message: " + message);
+	      logger.info("Found constraint violation. Message: " + message);
 	    }
 	  }
 }
